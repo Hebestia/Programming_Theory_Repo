@@ -3,34 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthbarUI : MonoBehaviour
+public class HealthbarUI : MonoBehaviour  //INHERITANCE
 {
     [SerializeField] private Image healthFill;
     [SerializeField] private Character character;
 
     // Start is called before the first frame update
-    void Start()
+    void Start()  //INHERITED ABSTRACTION
     {
-        UpdateHealthbar();
+        UpdateHealthbar();  //ABSTRACTION
     }
 
     // Update is called once per frame
-    void Update()
+    void Update()  //INHERITED ABSTRACTION
     {
-        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
+        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);  //ABSTRACTION
     }
 
-    private void OnEnable()
+    private void OnEnable()  //INHERITED ABSTRACTION
     {
-        character.onTakeDamage += UpdateHealthbar;
+        // start listening for this action
+        character.onTakeDamage += UpdateHealthbar;  //ABSTRACTION
     }
 
-    private void OnDisable()
+    private void OnDisable()  //INHERITED ABSTRACTION
     {
-        character.onTakeDamage -= UpdateHealthbar;
+        // stop listening for this action
+        character.onTakeDamage -= UpdateHealthbar;  //ABSTRACTION
     }
 
-    void UpdateHealthbar ()
+    void UpdateHealthbar()  //ABSTRACTION
     {
         healthFill.fillAmount = (float)character.CurHp / (float)character.MaxHp;
     }

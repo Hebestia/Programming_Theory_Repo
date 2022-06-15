@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CharacterController : MonoBehaviour
+public class CharacterController : MonoBehaviour  //INHERITANCE
 {
     private float moveToUpdateRate = 0.1f;
     private float lastMoveToUpdate;
@@ -11,38 +11,40 @@ public class CharacterController : MonoBehaviour
 
     private NavMeshAgent agent;
 
-    private void Awake()
+    private void Awake()  //INHERITED ABSTRACTION
     {
-        agent = GetComponent<NavMeshAgent>();
+        // get agent reference so we can navigate in scene
+        agent = GetComponent<NavMeshAgent>();  //INHERITED ABSTRACTION
     }
 
     // Update is called once per frame
-    void Update()
+    void Update()  //INHERITED ABSTRACTION
     {
+        // if we have a target then move to it but don't do it every frame
         if (moveTarget != null && Time.time - lastMoveToUpdate > moveToUpdateRate)
         {
             lastMoveToUpdate = Time.time;
-            MoveToPosition(moveTarget.position);
+            MoveToPosition(moveTarget.position);  //ABSTRACTION
         }
     }
 
-    public void LookTowards(Vector3 direction)
+    public void LookTowards(Vector3 direction)  //ABSTRACTION
     {
-        transform.rotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.LookRotation(direction);  //ABSTRACTION
     }
 
-    public void MoveToTarget(Transform target)
+    public void MoveToTarget(Transform target)  //ABSTRACTION
     {
         moveTarget = target;
     }
 
-    public void MoveToPosition(Vector3 position)
+    public void MoveToPosition(Vector3 position)  //ABSTRACTION
     {
         agent.isStopped = false;
-        agent.SetDestination(position);
+        agent.SetDestination(position);  //ABSTRACTION
     }
 
-    public void StopMovement()
+    public void StopMovement()  //ABSTRACTION
     {
         agent.isStopped = true;
         moveTarget = null;
